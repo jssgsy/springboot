@@ -1,4 +1,4 @@
-package com.univ.basic.condition;
+package com.univ.basic.condition.onbean;
 
 import org.junit.Test;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -63,5 +63,3 @@ public class ConditionalOnBeanTest {
 }
 
 class A {}
-
-class B {}
