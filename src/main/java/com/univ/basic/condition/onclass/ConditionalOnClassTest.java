@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author univ
  * @date 2019/1/28 5:14 PM
- * @description
+ * @description @ConditionalOnClass：当类路径下有指定的类(.class文件)时匹配
  */
 @Configuration
 public class ConditionalOnClassTest {
@@ -19,6 +19,7 @@ public class ConditionalOnClassTest {
     @Test
     public void test1() {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ConditionalOnClassTest.class);
+        // 这里要求只有一个DBService的实例，可以使用applicationContext.getBean( "mysql", DBService.class)来获取指定的实例
         DBService dbService = applicationContext.getBean(DBService.class);
         System.out.println(dbService.getDBName());
     }
@@ -26,10 +27,11 @@ public class ConditionalOnClassTest {
     /**
      * 如果类路径下有MysqlDB.class，则创建MysqlDB实例
      *
-     * 经实践，不能和下面的getOracleDB共存
+     * 经实践，不能和下面的getOracleDB共存，因为此时会有两个DBService的实例，
+     * 当然可以使用applicationContext.getBean( "mysql", DBService.class)来获取指定的实例
      * @return
      */
-    @Bean
+    @Bean("mysql")
     @ConditionalOnClass(MysqlDB.class)
     public DBService getMysqlDB() {
         return new MysqlDB();
