@@ -1,5 +1,7 @@
 package com.univ.controller;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.univ.entity.ConfigurationPropertiesDemo;
+import com.univ.property.UnivProperty;
 
 /**
  * @author univ
@@ -20,6 +23,9 @@ public class HelloController {
 
     @Autowired
     private ConfigurationPropertiesDemo configurationPropertiesDemo;
+
+    @Resource
+    private UnivProperty univProperty;
 
     @RequestMapping("/hotDeploy")
     @ResponseBody
@@ -41,5 +47,12 @@ public class HelloController {
         System.out.println(configurationPropertiesDemo.getName());*/
 
         return configurationPropertiesDemo;
+    }
+
+    @GetMapping("/starter/test")
+    @ResponseBody
+    public String starter(){
+        System.out.println(univProperty);
+        return "ok";
     }
 }

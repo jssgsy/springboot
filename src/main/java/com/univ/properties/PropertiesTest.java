@@ -20,7 +20,7 @@ import org.springframework.context.annotation.PropertySource;
  * 注意，因为这里使用的是AnnotationConfigApplicationContext，所以需要显示开启属性自动注入，
  * 如果是以spring boot的方式启动则不用指定，因为默认是开启的。
  *
- * 注：这里还能指定要显示实例的Bean(如@EnableConfigurationProperties(UnivDemo.class)会启动UnivDemo读取配置文件且会实例化其实例)
+ * 注：这里还能指定要显示实例的Bean(如@EnableConfigurationProperties(UnivDemo.class)会启动UnivDemo读取配置文件且会实例化其实例并将其存放到BeanFactory中)
  */
 @EnableConfigurationProperties
 
@@ -32,7 +32,8 @@ import org.springframework.context.annotation.PropertySource;
 public class PropertiesTest {
 
     /**
-     * 上面已经使用@EnableConfigurationProperties(UnivDemo.class)了，已经有了实例对象。
+     * 上面已经使用@EnableConfigurationProperties和@Bean了，已经有了实例对象，
+     * 但注意，只是BeanFactory中有此实例，并不会被注入给PropertiesTest！所以其实这里是null。重要！
      */
     @Resource
     private UnivDemo univDemo;
@@ -43,9 +44,8 @@ public class PropertiesTest {
     @Test
     public void fn1() {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(PropertiesTest.class);
-        UnivDemo aaa = applicationContext.getBean(UnivDemo.class);
-        System.out.println(aaa.getAge());
-        System.out.println(aaa.getName());
+        UnivDemo univDemo = applicationContext.getBean(UnivDemo.class);
+        System.out.println(univDemo);
     }
 
     /**
@@ -54,9 +54,14 @@ public class PropertiesTest {
     @Test
     public void fn2() {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(PropertiesTest.class);
-         PropertiesTest bean = applicationContext.getBean(PropertiesTest.class);
-        System.out.println(bean.univDemo.getAge());
-        System.out.println(bean.univDemo.getName());
+        PropertiesTest propertyTest = applicationContext.getBean("propertiesTest", PropertiesTest.class);
+        /**
+         * 注意，这里是propertyTest.univDemo,而不是univDemo，
+         * PropertiesTest只有一个实例，且在BeanFactory中。这是junit测试的方法！
+         */
+        System.out.println(propertyTest.univDemo);//UnivDemo(name=liuminglu, age=20)
+        System.out.println(univDemo);//null
+
     }
 
     @Bean
@@ -64,6 +69,5 @@ public class PropertiesTest {
         return new UnivDemo();
     }
 
-
-    }
+}
 

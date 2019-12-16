@@ -49,3 +49,12 @@ management.endpoints.web.exposure.include=*
 * /conditions(即1.x中的/autoconfig)
 * /threaddump：dumps the thread information of the underlying JVM
 * /configprops：allows us to fetch all @ConfigurationProperties beans
+
+# SpringApplication.run()与AnnotationConfigApplicationContext启动方式备忘
+1. 实际项目使用中一般使用`SpringApplication.run()`的方式，其默认开启了许多功能，如配置文件加载，属性自动注入等，启动过程会较耗时一些。
+开发中有时为了便于测试某些功能，每次都启动一次效率会有些低下，此时可使用`AnnotationConfigApplicationContext`来“轻”启动项目，
+AnnotationConfigApplicationContext一般结合@Configuration使用，其只会实例化@Configuration下的@Bean注释的方法，
+因此当需使用配置文件或者其它功能时均需要手动开启(如@EnableConfigurationProperties，@PropertySource)。可参考PropertiesTest.java
+
+
+
