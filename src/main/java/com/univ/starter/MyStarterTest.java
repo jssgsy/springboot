@@ -23,8 +23,9 @@ public class MyStarterTest {
 
     /**
      * UnivProperty是引用的starter中的类。
+     * 注：因为starter中引入的UnivProperty实例名是univProperty，所以下面@Bean使用了"univProperty2"，否则会有两个一样名字的实例，冲突
      */
-    @Resource
+    @Resource(name = "univProperty2")
     private UnivProperty univProperty;
 
     @Test
@@ -35,7 +36,7 @@ public class MyStarterTest {
         System.out.println(bean.univProperty);
     }
 
-    @Bean
+    @Bean("univProperty2")
     public UnivProperty univProperty(){
         return new UnivProperty();
     }
