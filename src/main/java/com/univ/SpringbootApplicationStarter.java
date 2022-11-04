@@ -1,10 +1,15 @@
 package com.univ;
 
+import java.util.Arrays;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.util.StringUtils;
 
 /**
  * spring boot项目的启动类
@@ -15,9 +20,21 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling   // 开启spring的定时任务功能
 @EnableAsync    // 开启定时任务异步化功能(覆盖默认的任务串行)
 @EnableCaching  // 开启缓存
+@Slf4j
 public class SpringbootApplicationStarter {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootApplicationStarter.class, args);
+		ConfigurableApplicationContext application = SpringApplication
+				.run(SpringbootApplicationStarter.class, args);
+		Environment env = application.getEnvironment();
+		String[] activeProfiles = env.getActiveProfiles();
+		String port = env.getProperty("server.port");
+		port = (StringUtils.isEmpty(port) ? "8080" : port);
+		String path = env.getProperty("server.servlet.context-path");
+		log.info("\n----------------------------------------------------------\n\t" +
+				"Application springboot is running! Access URLs:\n\t" +
+				"active profiles are :" + Arrays.toString(activeProfiles) + "\n\t" +
+				"Local: \t\thttp://localhost:" + port + path + "/\n\t" +
+				"----------------------------------------------------------");
 	}
 }
