@@ -1,15 +1,12 @@
 package com.univ.controller;
 
+import com.univ.entity.PropertyDemo;
+import com.univ.property.UnivProperty;
 import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.univ.entity.ConfigurationPropertiesDemo;
-import com.univ.property.UnivProperty;
 
 /**
  * @author univ
@@ -21,8 +18,8 @@ import com.univ.property.UnivProperty;
 @RequestMapping("/hello")
 public class HelloController {
 
-    @Autowired
-    private ConfigurationPropertiesDemo configurationPropertiesDemo;
+    @Resource
+    private PropertyDemo propertyDemo;
 
     @Resource
     private UnivProperty univProperty;
@@ -41,12 +38,12 @@ public class HelloController {
      */
     @GetMapping("/configurationProperties")
     @ResponseBody
-    public ConfigurationPropertiesDemo configuration() {
+    public PropertyDemo configuration() {
         // 千万不要使用new的形式，否则当然获取不到配置的信息，ConfigurationPropertiesDemo的实例已经在bean中了！
         /*ConfigurationPropertiesDemo configurationPropertiesDemo = new ConfigurationPropertiesDemo();
         System.out.println(configurationPropertiesDemo.getName());*/
 
-        return configurationPropertiesDemo;
+        return propertyDemo;
     }
 
     @GetMapping("/starter/test")
