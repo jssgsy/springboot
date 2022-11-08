@@ -1,12 +1,13 @@
 package com.univ.controller;
 
 import com.univ.entity.PropertyDemo;
+import com.univ.entity.MyProperty;
 import com.univ.property.UnivProperty;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author univ
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @description 入门级Controller
  */
 
-@Controller
-@RequestMapping("/hello")
-public class HelloController {
+@RestController
+@RequestMapping("/property")
+public class PropertyController {
 
     @Resource
     private PropertyDemo propertyDemo;
@@ -24,11 +25,13 @@ public class HelloController {
     @Resource
     private UnivProperty univProperty;
 
-    @RequestMapping("/hotDeploy")
+    @Resource
+    private MyProperty myProperty;
+
+    @GetMapping("/propertySource")
     @ResponseBody
-    public String hotDeploy() {
-        // 这里还没创建视图解析器，先通过curl请求，然后改动这里的内容，观察热部署的效果
-        System.out.println("hello, world");
+    public String propertySource() {
+        System.out.println(myProperty);
         return "ok";
     }
 
@@ -39,9 +42,6 @@ public class HelloController {
     @GetMapping("/configurationProperties")
     @ResponseBody
     public PropertyDemo configuration() {
-        // 千万不要使用new的形式，否则当然获取不到配置的信息，ConfigurationPropertiesDemo的实例已经在bean中了！
-        /*ConfigurationPropertiesDemo configurationPropertiesDemo = new ConfigurationPropertiesDemo();
-        System.out.println(configurationPropertiesDemo.getName());*/
 
         return propertyDemo;
     }

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * @author univ 2022/11/8 11:03
  */
 @Configuration
-@EnableConfigurationProperties(PropertyDemo.class)
+@EnableConfigurationProperties(value = {PropertyDemo.class})
 public class PropertyConfig {
 
 }
