@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 /**
  * @author univ
@@ -55,7 +54,6 @@ interface DBService {
     String getDBName();
 }
 
-@Component
 class MysqlDB implements DBService {
 
     @Override
@@ -64,7 +62,6 @@ class MysqlDB implements DBService {
     }
 }
 
-@Component
 class OracleDB implements DBService {
 
     @Override
