@@ -2,6 +2,7 @@ package com.univ.config;
 
 import com.alibaba.nacos.api.config.ConfigType;
 import com.alibaba.nacos.api.config.annotation.NacosValue;
+import com.alibaba.nacos.spring.context.annotation.config.EnableNacosConfig;
 import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
  * autoRefreshed必须设置为true，这是同步起作用的前提；
  * type：最好也同步指定下；
  */
+@EnableNacosConfig
 @NacosPropertySource(dataId = "com.univ", autoRefreshed = true, type = ConfigType.PROPERTIES)
 @Data
 public class NacosItemConfig {

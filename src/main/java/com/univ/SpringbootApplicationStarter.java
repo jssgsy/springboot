@@ -1,15 +1,12 @@
 package com.univ;
 
-import java.util.Arrays;
+import com.univ.service.UnivFactoryBean;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.env.Environment;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.util.StringUtils;
 
 /**
  * spring boot项目的启动类
@@ -24,7 +21,11 @@ import org.springframework.util.StringUtils;
 public class SpringbootApplicationStarter {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext application = SpringApplication
+		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+				SpringbootApplicationStarter.class);
+		UnivFactoryBean bean = applicationContext.getBean(UnivFactoryBean.class);
+		System.out.println(bean);
+		/*ConfigurableApplicationContext application = SpringApplication
 				.run(SpringbootApplicationStarter.class, args);
 		Environment env = application.getEnvironment();
 		String[] activeProfiles = env.getActiveProfiles();
@@ -35,6 +36,6 @@ public class SpringbootApplicationStarter {
 				"Application springboot is running! Access URLs:\n\t" +
 				"active profiles are :" + Arrays.toString(activeProfiles) + "\n\t" +
 				"Local: \t\thttp://localhost:" + port + path + "/\n\t" +
-				"----------------------------------------------------------");
+				"----------------------------------------------------------");*/
 	}
 }
