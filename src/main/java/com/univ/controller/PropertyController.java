@@ -1,7 +1,6 @@
 package com.univ.controller;
 
 import com.univ.entity.PropertyDemo;
-import com.univ.entity.MyProperty;
 import com.univ.property.UnivProperty;
 import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,16 +23,6 @@ public class PropertyController {
 
     @Resource
     private UnivProperty univProperty;
-
-    @Resource
-    private MyProperty myProperty;
-
-    @GetMapping("/propertySource")
-    @ResponseBody
-    public String propertySource() {
-        System.out.println(myProperty);
-        return "ok";
-    }
 
     /**
      * @ConfigurationProperties的使用
