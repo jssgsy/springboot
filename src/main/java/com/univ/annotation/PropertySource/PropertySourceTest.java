@@ -13,7 +13,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * 便于测试，注意要引入@ComponentScan
  * @author univ 2023/3/22 09:17
  */
 @RunWith(SpringRunner.class)

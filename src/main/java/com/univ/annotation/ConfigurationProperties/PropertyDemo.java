@@ -1,4 +1,4 @@
-package com.univ.entity;
+package com.univ.annotation.ConfigurationProperties;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

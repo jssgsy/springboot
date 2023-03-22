@@ -1,6 +1,5 @@
 package com.univ.controller;
 
-import com.univ.entity.PropertyDemo;
 import com.univ.property.UnivProperty;
 import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,21 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PropertyController {
 
     @Resource
-    private PropertyDemo propertyDemo;
-
-    @Resource
     private UnivProperty univProperty;
-
-    /**
-     * @ConfigurationProperties的使用
-     * @return
-     */
-    @GetMapping("/configurationProperties")
-    @ResponseBody
-    public PropertyDemo configuration() {
-
-        return propertyDemo;
-    }
 
     @GetMapping("/starter/test")
     @ResponseBody
