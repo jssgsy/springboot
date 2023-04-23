@@ -1,22 +1,26 @@
 package com.univ.func.retry;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import javax.annotation.Resource;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @author univ 2023/4/12 11:03
  */
-@SpringBootApplication(scanBasePackages = {"com.univ"})
+@SpringBootTest
+@RunWith(SpringRunner.class)
 @EnableRetry
 public class SpringRetryTest {
 
-	public static void main(String[] args) {
-		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringRetryTest.class);
+	@Resource
+	private HelloServiceImpl helloService;
 
-		HelloServiceImpl helloService = applicationContext.getBean(HelloServiceImpl.class);
+	@Test
+	public void test() {
 		helloService.sayHello();
-		applicationContext.close();
 	}
 
 }
