@@ -2,6 +2,7 @@ package com.univ.config;
 
 import com.alibaba.nacos.api.config.annotation.NacosConfigListener;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 /**
  * 注：nacos服务端需先启动
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * @author univ 2022/12/8 16:11
  */
 @Configuration
+@Profile("nacos")
 public class NacosConfig {
 
 	/**

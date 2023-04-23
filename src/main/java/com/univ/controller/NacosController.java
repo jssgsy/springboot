@@ -7,6 +7,7 @@ import com.univ.config.NacosItemConfig;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Resource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/nacos")
+@Profile("nacos")
 public class NacosController {
 
 	@Resource

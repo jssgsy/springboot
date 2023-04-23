@@ -5,6 +5,7 @@ import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.alibaba.nacos.spring.context.annotation.config.EnableNacosConfig;
 import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import lombok.Data;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Component;
 @EnableNacosConfig
 @NacosPropertySource(dataId = "com.univ", autoRefreshed = true, type = ConfigType.PROPERTIES)
 @Data
+@Profile("nacos")
 public class NacosItemConfig {
 
 	/**
