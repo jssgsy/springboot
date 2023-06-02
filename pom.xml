@@ -142,6 +142,12 @@
             <artifactId>spring-aspects</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot-web-starter</artifactId>
+            <version>1.11.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
