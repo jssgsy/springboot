@@ -1,8 +1,8 @@
 package com.univ;
 
-import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -10,6 +10,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+
+import java.util.Arrays;
 
 /**
  * spring boot项目的启动类
@@ -21,6 +24,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync    // 开启定时任务异步化功能(覆盖默认的任务串行)
 @EnableCaching  // 开启缓存
 @Slf4j
+@MapperScan(basePackages = {"com.univ.mapper"})
+@EnableWebSocket
 public class SpringbootApplicationStarter {
 
 	public static void main(String[] args) {

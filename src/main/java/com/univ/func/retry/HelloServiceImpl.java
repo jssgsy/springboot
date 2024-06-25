@@ -21,4 +21,8 @@ public class HelloServiceImpl {
 		System.out.println("===sayHello() first line ===");
 		throw new IllegalStateException("o o");
 	}
+
+	public void goodMorning() {
+		System.out.println("=== goodMorning ===");
+	}
 }
