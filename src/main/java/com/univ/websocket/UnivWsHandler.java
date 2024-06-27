@@ -28,7 +28,7 @@ public class UnivWsHandler implements WebSocketHandler {
     // 是原生@OnOpen的封装
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        log.info("websocket连接成功了, sessionId：{}", session.getId());
+        log.info("websocket连接成功了, sessionId：{}, thread:{}", session.getId(), Thread.currentThread().getName());
         sessionList.add(session);
     }
 
@@ -36,6 +36,7 @@ public class UnivWsHandler implements WebSocketHandler {
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
         helloService.goodMorning();
+        log.info("handleMessage, thread:{}", Thread.currentThread().getName());
         if (message instanceof TextMessage) {
             String payload = ((TextMessage) message).getPayload();
             log.info("收到客户端消息了, msg：{}", payload);
