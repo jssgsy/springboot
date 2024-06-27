@@ -12,14 +12,14 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/websocket")
-public class WebSocketController {
+public class UnivWsController {
 
     @Resource
-    private UnivWebSocketHandler univWebSocketHandler;
+    private UnivWsHandler univWsHandler;
 
     @RequestMapping("/send")
     public void pushToWeb(String message) {
-        univWebSocketHandler.sendMsg(message);
+        univWsHandler.sendMsg(message);
     }
 
 }

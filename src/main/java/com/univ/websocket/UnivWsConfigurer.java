@@ -11,15 +11,19 @@ import javax.annotation.Resource;
  * date 2024/6/25
  */
 @Configuration
-public class UnivWebSocketConfigurer implements WebSocketConfigurer {
+public class UnivWsConfigurer implements WebSocketConfigurer {
 
     @Resource
-    private UnivWebSocketHandler univWebSocketHandler;
+    private UnivWsHandler univWsHandler;
+
+    @Resource
+    private UnivHandShakeInterceptor univHandShakeInterceptor;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(univWebSocketHandler, "/websocket/test")
-                .setAllowedOrigins("*");
+        registry.addHandler(univWsHandler, "/websocket/test")
+                .setAllowedOrigins("*")
+                .addInterceptors(univHandShakeInterceptor);
         // 这里还能添加拦截器，与处理普通web请求很类似
         // handlerRegistration.addInterceptors().setAllowedOrigins();
     }

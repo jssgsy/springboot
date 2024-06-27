@@ -1,6 +1,7 @@
 package com.univ.websocket;
 
 import com.univ.func.retry.HelloServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
@@ -15,7 +16,8 @@ import java.util.List;
  * date 2024/6/25
  */
 @Component
-public class UnivWebSocketHandler implements WebSocketHandler {
+@Slf4j
+public class UnivWsHandler implements WebSocketHandler {
 
     // 可以直接注入其它spring类
     @Resource
@@ -26,7 +28,7 @@ public class UnivWebSocketHandler implements WebSocketHandler {
     // 是原生@OnOpen的封装
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println("websocket连接成功了, sessionId：" + session.getId());
+        log.info("websocket连接成功了, sessionId：{}", session.getId());
         sessionList.add(session);
     }
 
@@ -36,7 +38,7 @@ public class UnivWebSocketHandler implements WebSocketHandler {
         helloService.goodMorning();
         if (message instanceof TextMessage) {
             String payload = ((TextMessage) message).getPayload();
-            System.out.println("收到客户端消息了： " + payload);
+            log.info("收到客户端消息了, msg：{}", payload);
             sendMsg(payload);
         }
     }
@@ -45,12 +47,14 @@ public class UnivWebSocketHandler implements WebSocketHandler {
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
         // 省略
+        log.info("===handleTransportError===");
     }
 
     // 是原生@OnClose的封装
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
         // 省略
+        log.info("===afterConnectionClosed===");
     }
 
     // 是否支持分片消息，用于发送大内容消息时
@@ -60,6 +64,7 @@ public class UnivWebSocketHandler implements WebSocketHandler {
     }
 
     public void sendMsg(String msg) {
+        log.info("开始给客户端发送消息：{}", msg);
         for (WebSocketSession webSocketSession : sessionList) {
             if (webSocketSession.isOpen()) {
                 try {
