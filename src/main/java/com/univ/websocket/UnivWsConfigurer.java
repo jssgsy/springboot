@@ -1,5 +1,6 @@
 package com.univ.websocket;
 
+import com.univ.websocket.ssh.SshWsHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
@@ -17,6 +18,9 @@ public class UnivWsConfigurer implements WebSocketConfigurer {
     private UnivWsHandler univWsHandler;
 
     @Resource
+    private SshWsHandler sshWsHandler;
+
+    @Resource
     private UnivHandShakeInterceptor univHandShakeInterceptor;
 
     @Override
@@ -24,6 +28,7 @@ public class UnivWsConfigurer implements WebSocketConfigurer {
         registry.addHandler(univWsHandler, "/websocket/test")
                 .setAllowedOrigins("*")
                 .addInterceptors(univHandShakeInterceptor);
+        registry.addHandler(sshWsHandler, "/websocket/ssh").setAllowedOrigins("*");
         // 这里还能添加拦截器，与处理普通web请求很类似
         // handlerRegistration.addInterceptors().setAllowedOrigins();
     }
