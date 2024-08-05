@@ -26,7 +26,7 @@ import java.util.Map;
 public class SshWsHandler extends AbstractWebSocketHandler {
 
     static String username = "root";
-    static String password = "/*1Univ2aliyun*/";
+    static String password = "";
     static String host = "121.41.101.19";
     static int port = 22;
 
@@ -87,6 +87,7 @@ public class SshWsHandler extends AbstractWebSocketHandler {
                 // 这里在等外面某人关闭，否则这里会一直阻塞
                 if (channel.isClosed()) {
                     log.info("ssh channel被关闭了， webSocketSessionId:{}", webSocketSession.getId());
+                    in.close();
                     break;
                 }
             }
@@ -121,10 +122,16 @@ public class SshWsHandler extends AbstractWebSocketHandler {
         if (session != null && session.isConnected()) {
             session.disconnect();
         }
+        sessionMap.remove(webSocketSessionId);
 
         ChannelShell channelShell = channelMap.get(webSocketSessionId);
         if (channelShell != null && channelShell.isConnected()) {
             channelShell.disconnect();
+        }
+        channelMap.remove(webSocketSessionId);
+        PrintStream printStream = printStreamMap.remove(webSocketSessionId);
+        if (null != printStream) {
+            printStream.close();
         }
     }
 
