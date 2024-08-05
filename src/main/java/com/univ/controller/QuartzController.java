@@ -22,6 +22,7 @@ public class QuartzController {
     @ResponseBody
     public String executeNow(@RequestParam("jobId") String jobId, @RequestParam("triggerId") String triggerId) throws SchedulerException {
         // 不论状态是暂停还是执行中
+        // 前提是此任务已经有trigger关联在，否则不能直接这样执行，经验证，调用后不用重新调用start方法。
         scheduler.triggerJob(JobKey.jobKey(jobId, "univ_job_group"));
         // 经验证，调用后不用重新调用start方法。
         return "ok";
