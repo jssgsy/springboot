@@ -1,0 +1,58 @@
+server:
+  servlet:
+    context-path: /api
+  port: 9000
+
+# 开启spring boot actuator的所有端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: /*1Univ2mysql*/
+    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_DATABASE:jdbc}
+    username: root
+#  profiles:
+#    active: dev
+  quartz:
+    job-store-type: jdbc    # 一般使用这个
+    initialize-schema: embedded
+    #定时任务启动开关，true-开  false-关
+    auto-startup: true
+    #延迟1秒启动定时任务
+    startup-delay: 1s
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: UnivScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_    # 数据库中quartz相关的表的前缀
+            isClustered: true
+            misfireThreshold: 12000
+            clusterCheckinInterval: 15000
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool    # 使用的线程池，一般用SimpleThreadPool即可
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+
+# 为my-springboot-starter配置参数
+univ:
+  age: 18
+  name: haha
+  starter:
+    age: 20
+    name: aaa
+
+demo:
+  address: hangzhou
+  age: 20
+  name: application_name

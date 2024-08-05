@@ -1,0 +1,8 @@
+nacos:
+  config:
+    auto-refresh: true
+    # 当远程配置项变更时，再次读取是否取新值；
+    enableRemoteSyncConfig: true
+    # 默认为空，即""
+    namespace: ''
+    server-addr: 127.0.0.1:8848
