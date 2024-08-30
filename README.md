@@ -20,7 +20,7 @@
 </dependency>
 ```
 * 开启所有端点
-在application.properties文件中设置
+在application.yml文件中设置
 ```properties
 management.endpoints.web.exposure.include=*
 ```

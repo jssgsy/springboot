@@ -25,7 +25,7 @@ public class SpringbootApplicationStarterTests {
 
 # 关于配置文件
 ## 资源文件
-默认情况下，资源文件(如application.properties)必须放在test/resources目录下，不会去读取main/resources目录；
+默认情况下，资源文件(如application.yml)必须放在test/resources目录下，不会去读取main/resources目录；
   * 可以在pom文件中设置读取main/resources下的资源文件；
   * 这是maven本身的机制，与springboot无关
 

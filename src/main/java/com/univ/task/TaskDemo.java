@@ -1,7 +1,6 @@
 package com.univ.task;
 
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,7 +16,7 @@ public class TaskDemo {
      * spring boot中被@Scheduled注解的方法就是定时方法，只要开启了spring的定时功能即可
      * @throws InterruptedException
      */
-    @Scheduled(cron = "1 * * * * *")
+//    @Scheduled(cron = "1 * * * * *")
     @Async
     public void sayHello() throws InterruptedException {
         for (int i = 0; i < 10; i++) {
@@ -26,7 +25,7 @@ public class TaskDemo {
         }
     }
 
-    @Scheduled(cron = "1 * * * * *")
+//    @Scheduled(cron = "1 * * * * *")
     @Async
     public void task2() throws InterruptedException {
         for (int i = 0; i < 10; i++) {
