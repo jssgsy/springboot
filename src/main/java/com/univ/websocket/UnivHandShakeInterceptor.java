@@ -24,7 +24,7 @@ public class UnivHandShakeInterceptor implements HandshakeInterceptor {
         return true;
     }
 
-    // 将在websocket连接成功前调用(UnivWebSocketHandler#afterConnectionEstablished)
+    // 将在websocket连接成功后调用(UnivWebSocketHandler#afterConnectionEstablished)
     @Override
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception exception) {
 //        System.out.println("UnivHandShakeInterceptor#afterHandshake，wsHandler: " + wsHandler);

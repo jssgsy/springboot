@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * 用来测试给websocket客户端主动ntudd消息
+ * 用来测试给websocket客户端主动发送消息
  * @author univ
  * date 2024/6/24
  */
