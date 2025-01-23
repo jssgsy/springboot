@@ -1,7 +1,6 @@
 package com.univ.starter;
 
-import javax.annotation.Resource;
-
+import com.univ.property.UnivProperty;
 import org.junit.Test;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -9,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-import com.univ.property.UnivProperty;
+import javax.annotation.Resource;
 
 /**
  * @author univ
@@ -17,7 +16,7 @@ import com.univ.property.UnivProperty;
  * @description 演示使用自定义starter
  */
 @Component
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.yml")
 @EnableConfigurationProperties
 public class MyStarterTest {
 

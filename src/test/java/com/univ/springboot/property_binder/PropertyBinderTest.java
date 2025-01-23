@@ -1,8 +1,5 @@
 package com.univ.springboot.property_binder;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import lombok.Data;
 import org.junit.Test;
 import org.springframework.boot.context.properties.bind.BindResult;
@@ -17,6 +14,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author univ 2022/12/16 17:29
  */
@@ -27,7 +28,7 @@ public class PropertyBinderTest {
 	public void fn1() throws IOException {
 		StandardEnvironment environment = new StandardEnvironment();
 		DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
-		Resource resource = defaultResourceLoader.getResource("classpath:application.properties");
+		Resource resource = defaultResourceLoader.getResource("classpath:application.yml");
 		List<PropertySource<?>> propertySourceList = new PropertiesPropertySourceLoader().load("properties", resource);
 		propertySourceList.forEach(propertySource -> environment.getPropertySources().addLast(propertySource));
 
