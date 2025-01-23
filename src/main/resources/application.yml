@@ -13,9 +13,11 @@ management:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    password: /*1Univ2mysql*/
-    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_DATABASE:jdbc}
     username: root
+    password: root
+    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3316}/${DB_DATABASE:springboot}?createDatabaseIfNotExist=true&characterEncoding=utf8
+
+
 #  profiles:
 #    active: dev
   quartz:

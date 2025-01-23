@@ -1,0 +1,30 @@
+server:
+  servlet:
+    context-path:/api
+demo:
+  name: application_name
+  age: 20
+  address: hangzhou
+management:
+  endpoints:
+    web:
+      exposure:
+        include:*
+univ:
+  age: 18
+  name: haha
+  starter:
+    age: 20
+spring:
+  datasource:
+    url:jdbc: mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3316}/${DB_DATABASE:springboot}
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  profiles:
+    active: dev
+obj:
+  hobby:
+    - movie
+    - book
+  name: uaale
