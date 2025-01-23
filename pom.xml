@@ -85,6 +85,12 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!-- 不能与shiro共存 -->
+        <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency> -->
+
         <dependency>
             <groupId>com.univ</groupId>
             <artifactId>my-springboot-starter</artifactId>
