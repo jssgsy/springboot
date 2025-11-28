@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 @RequestMapping("/quartz")
 public class QuartzController {
 
+    // 可直接注入
     @Resource
     private Scheduler scheduler;
 
